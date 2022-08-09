@@ -6,7 +6,7 @@ export default function Home() {
 
   let [filteredPosts, setFilteredPosts] = React.useState(posts);
   let [loading, setLoading] = React.useState(true);
-  
+  let [hideSidebar, setHideSidebar] = React.useState(false);
   const handleSearch = e => {
     let filteredPosts = posts.filter(post => {
       return post.title.toLowerCase().includes(e.target.value.toLowerCase());
@@ -22,13 +22,25 @@ export default function Home() {
 
   setTimeout(() => {
     setLoading(true);
-  },2000)
+  },500)
   
+  const hideSidebarFunction = e => {
+    setHideSidebar(!hideSidebar);
+  }
+
   return (
     <>
+     <h1 className="p-5" onClick={hideSidebarFunction}>x Show side bar</h1>
+    <div className="flex justify-start w-40 sticky left-0 bg-teal-400" style={{visibility: hideSidebar ? 'hidden' : 'visible'}}>
+    <div className="p-5 text-left" >
+      <h1 className="text-2xl text-white"> Search </h1>
+      <h1 className="text-2xl text-white"> Posts </h1>
+      <h1 className="text-2xl text-white"> Contact </h1> 
+    </div>
+    </div>
     <div className="mt-2 mx-0 flex bg-black">
       <h1 className="text-4xl p-5 text-white">Blog</h1>
-      <input type="text" className="w-1/2 p-5 text-black border-1 border-black" onChange={handleSearch}  placeholder="Search" />
+      <input type="text" className="w-1/2 p-5 text-black border-1 border-black"  onChange={handleSearch}  placeholder="Search" />
     </div>
     {loading ?(<div className="flex containter mx-0 p-5 justify-center">
      <div className="flex-col text-left w-1/2">
