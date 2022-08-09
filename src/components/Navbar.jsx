@@ -18,8 +18,8 @@ export default function Navbar() {
       <div className="text-black  ">
         {navigation.map(item => {
           return (
-            <Link to={item.path} key={item.name}>
-              {" "}{item.name}{" "}
+            <Link className="font-bold" to={item.path} key={item.name}>
+              {" "}{item.name.toUpperCase()}{" "}
             </Link>
           );
         })}
@@ -29,7 +29,7 @@ export default function Navbar() {
           return (
             <Link to={item.path} key={item.name}>
               {"   "}
-              {item.name}
+              {item.name.toUpperCase()}
               {"   "}
             </Link>
           );

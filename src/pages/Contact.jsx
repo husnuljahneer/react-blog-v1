@@ -13,6 +13,7 @@ export default function Contact() {
       );
       const data = await response.json();
       setUser(data);
+      setFilteredUsers(data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -31,7 +32,12 @@ export default function Contact() {
     setFilteredUsers(filteredUsers);
   };
 
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
+
   useEffect(() => {
+    setLoading(true);
     getUser();
   }, []);
 
@@ -48,7 +54,12 @@ export default function Contact() {
                 </div>
               </div>
             : <div className="flex flex-col containter mx-0 p-5 justify-center">
-                <input type="text" placeholder="Search" onChange={filterUser} />
+                <input
+                  type="text"
+                  className="border border-black p-5"
+                  placeholder="Search"
+                  onChange={filterUser}
+                />
                 <div className="flex-col text-left w-1/2">
                   {filteredUsers.map(user => {
                     return (

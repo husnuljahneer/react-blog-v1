@@ -6,7 +6,7 @@ export default function Home() {
 
   let [filteredPosts, setFilteredPosts] = React.useState(posts);
   let [loading, setLoading] = React.useState(true);
-  let [hideSidebar, setHideSidebar] = React.useState(false);
+  let [hideSidebar, setHideSidebar] = React.useState(true);
   const handleSearch = e => {
     let filteredPosts = posts.filter(post => {
       return post.title.toLowerCase().includes(e.target.value.toLowerCase());
@@ -30,8 +30,8 @@ export default function Home() {
 
   return (
     <>
-     <h1 className="p-5" onClick={hideSidebarFunction}>x Show side bar</h1>
-    <div className="flex justify-start w-40 sticky left-0 bg-teal-400" style={{visibility: hideSidebar ? 'hidden' : 'visible'}}>
+     <h1 className="p-5 cursor-pointer" onClick={hideSidebarFunction}>x Show side bar</h1>
+    <div className="flex justify-start w-56 top-0 fixed left-0 bg-teal-400" style={{visibility: hideSidebar ? 'hidden' : 'visible',height: hideSidebar ? 40 : 1000}}>
     <div className="p-5 text-left" >
       <h1 className="text-2xl text-white"> Search </h1>
       <h1 className="text-2xl text-white"> Posts </h1>
@@ -40,7 +40,7 @@ export default function Home() {
     </div>
     <div className="mt-2 mx-0 flex bg-black">
       <h1 className="text-4xl p-5 text-white">Blog</h1>
-      <input type="text" className="w-1/2 p-5 text-black border-1 border-black"  onChange={handleSearch}  placeholder="Search" />
+      <input type="text" className="w-1/2 p-5 text-black border-2 border-black"  onChange={handleSearch}  placeholder="Search" />
     </div>
     {loading ?(<div className="flex containter mx-0 p-5 justify-center">
      <div className="flex-col text-left w-1/2">
