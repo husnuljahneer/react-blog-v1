@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const navigation = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" }
+  { name: "Users", path: "/contact" }
 ];
 
 const authNavigation = [

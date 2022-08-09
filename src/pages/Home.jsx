@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 export default function Home() {
 
   let [filteredPosts, setFilteredPosts] = React.useState(posts);
-
+  let [loading, setLoading] = React.useState(true);
+  
   const handleSearch = e => {
     let filteredPosts = posts.filter(post => {
       return post.title.toLowerCase().includes(e.target.value.toLowerCase());
@@ -14,6 +15,14 @@ export default function Home() {
     }).reverse();
     setFilteredPosts(filteredPosts);
   }
+
+  React.useEffect(()=>{
+    setLoading(false);
+  },[])
+
+  setTimeout(() => {
+    setLoading(true);
+  },2000)
   
   return (
     <>
@@ -21,19 +30,19 @@ export default function Home() {
       <h1 className="text-4xl p-5 text-white">Blog</h1>
       <input type="text" className="w-1/2 p-5 text-black border-1 border-black" onChange={handleSearch}  placeholder="Search" />
     </div>
-    <div className="flex containter mx-0 p-5 justify-center">
+    {loading ?(<div className="flex containter mx-0 p-5 justify-center">
      <div className="flex-col text-left w-1/2">
         {filteredPosts.map((post)=>{
           return(
             <div className="flex flex-col mb-5 mt-5" key={post.id}>
               <h1 className="text-2xl">{post.title}</h1>
               <p className="text-base flex-wrap">{post.content.slice(0,250)}</p>
-              <Link to={`/posts/${post.id}`} state={{id:post.id , title:post.title, content:post.content }} className="text-blue-500">Read More</Link>
+              <Link to={`/posts/${post.id}`} state={{posts:post }} className="text-blue-500">Read More</Link>
             </div>
           )
         })}
      </div>
-    </div>
+    </div>) : (<div className="flex containter mx-0 p-5 justify-center"> <div className="flex-col text-left w-1/2">Loading...</div></div>)}    
     </>
   );
 }
